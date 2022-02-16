@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Григорий Лисица](https://up.htmlacademy.ru/javascript/25/user/1841149).
-* Наставник: `Неизвестно`.
+* Наставник: [Виктор Кан](https://htmlacademy.ru/profile/viktorkan).
 
 ---
 
