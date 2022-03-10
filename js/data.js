@@ -12,7 +12,7 @@ const CHEKIN_TIME = ['12:00', '13:00', '14:00'];
 const CHECKOUT_TIME = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-const ADS_COUNT = 1;
+const OFFERS_COUNT = 1;
 
 const craeateAd = (_elem, id) => {
   const lat = getRandomNumberWithFloat(MINIMUM_LAT, MAXIMUM_LAT, 5);
@@ -41,6 +41,6 @@ const craeateAd = (_elem, id) => {
   };
 };
 
-const ADS = Array.from({length: ADS_COUNT}, craeateAd);
+const ADS = Array.from({length: OFFERS_COUNT}, craeateAd);
 
 export { ADS };

@@ -1,7 +1,7 @@
-import {ADS} from './data.js';
-import {createAd, FRAGMENT} from './ad.js';
+import {OFFERS} from './data.js';
+import {createOffer, FRAGMENT} from './offer.js';
 import './util.js';
 
-ADS.forEach((ad) => FRAGMENT.append(createAd(ad)));
+OFFERS.forEach((offer) => FRAGMENT.append(createOffer(offer)));
 
 document.querySelector('#map-canvas').append(FRAGMENT);
