@@ -1,8 +1,8 @@
 import {OFFERS} from './data.js';
 import {createOffer} from './offer.js';
 import './util.js';
-const FRAGMENT = document.createDocumentFragment();
+const fragment = document.createDocumentFragment();
 
-OFFERS.forEach((offer) => FRAGMENT.append(createOffer(offer)));
+OFFERS.forEach((offer) => fragment.append(createOffer(offer)));
 
-document.querySelector('#map-canvas').append(FRAGMENT);
+document.querySelector('#map-canvas').append(fragment);
