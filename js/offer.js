@@ -10,15 +10,11 @@ const TYPE = {
   hotel: 'Отель'
 };
 
-function hideElement(element) {
-  element.classList.add('hidden');
-}
+const hideElement = (element) => {element.classList.add('hidden');};
 
-function addValue(element, value) {
-  element.innerHTML = value;
-}
+const addValue = (element, value) => {element.innerHTML = value;};
 
-function createOffer({offer, author}) {
+const createOffer = ({offer, author}) => {
   const element = TEMPLATE.cloneNode(true);
   if (offer.title) {
     addValue(element.querySelector('.popup__title'), offer.title);
@@ -83,6 +79,6 @@ function createOffer({offer, author}) {
     hideElement(element.querySelector('.popup__avatar'));
   }
   return element;
-}
+};
 
 export {createOffer, FRAGMENT};
