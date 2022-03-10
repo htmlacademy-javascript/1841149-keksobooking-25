@@ -1,4 +1,4 @@
-import {getRoundedRandomNumber, getRandomNumberWithFloat, getRandomArray,getRandomArrayElement} from './util.js';
+import {getRoundedRandomNumber, getRandomNumberWithFloat, getRandomArray, getRandomArrayElement} from './util.js';
 
 const MINIMUM_LAT = 35.65000;
 const MAXIMUM_LAT = 35.70000;
