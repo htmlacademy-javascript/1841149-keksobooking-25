@@ -41,6 +41,6 @@ const craeateAd = (_elem, id) => {
   };
 };
 
-const ADS = Array.from({length: OFFERS_COUNT}, craeateAd);
+const OFFERS = Array.from({length: OFFERS_COUNT}, craeateAd);
 
-export { ADS };
+export { OFFERS };
