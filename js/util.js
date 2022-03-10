@@ -9,7 +9,7 @@ const getRandomNumber = (min, max) => {
   return (Math.random() * (max - min + 1) + min);
 };
 const getRoundedRandomNumber = (min, max) => Math.floor(getRandomNumber(min, max));
-const getRandomNumberWithFloat = (min,max,floatNumber = 1) => Number(getRandomNumber(min, max).toFixed(floatNumber));
+const getRandomNumberWithFloat = (min, max, floatNumber = 1) => Number(getRandomNumber(min, max).toFixed(floatNumber));
 const getRandomArrayElement = (elements) => elements[getRoundedRandomNumber(0, elements.length - 1)];
 
 const getRandomArray = (source) => {
