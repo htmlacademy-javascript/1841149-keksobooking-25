@@ -78,7 +78,7 @@ function createOffer({offer, author}) {
     hideElement(element.querySelector('.popup__photos'));
   }
   if (author.avatar) {
-    element.querySelector('.popup__avatar').src = author.avatar
+    element.querySelector('.popup__avatar').src = author.avatar;
   } else {
     hideElement(element.querySelector('.popup__avatar'));
   }
