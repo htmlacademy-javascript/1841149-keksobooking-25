@@ -7,6 +7,3 @@ const fragment = document.createDocumentFragment();
 OFFERS.forEach((offer) => fragment.append(createOffer(offer)));
 
 document.querySelector('#map-canvas').append(fragment);
-
-activateForms();
-deactivateForms();

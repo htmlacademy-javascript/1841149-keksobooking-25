@@ -1,30 +1,32 @@
 const AD_FORM = document.querySelector('.ad-form');
 const FILTERS_FORM = document.querySelector('.map__filters');
 
-function toggleClass(element, clas){
-  element.classList.toggle(clas);
-}
+const addClass = (element, clas) => {element.classList.add(clas);};
+
+const removeClass = (element, clas) => {element.classList.remove(clas);};
+
+const disableFiltersForm = (value) => {FILTERS_FORM.querySelectorAll('select, .map__features').forEach((element) => {element.disabled = value;});};
+
+const disableAdForm = (value) => {AD_FORM.querySelectorAll('fieldset').forEach((element) => {element.disabled = value;});};
 
 const deactivateAdForm = () => {
-  toggleClass(AD_FORM, 'ad-form--disabled');
-  AD_FORM.querySelectorAll('fieldset').forEach((element) => {element.disabled = true;});
+  addClass(AD_FORM, 'ad-form--disabled');
+  disableAdForm(true);
 };
 
 const activateAdForm = () => {
-  toggleClass(AD_FORM, 'ad-form--disabled');
-  AD_FORM.querySelectorAll('fieldset').forEach((element) => {element.disabled = false;});
+  removeClass(AD_FORM, 'ad-form--disabled');
+  disableAdForm(false);
 };
 
 const deactivateFiltersForm = () => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled');
-  FILTERS_FORM.querySelectorAll('select').forEach((element) => {element.disabled = true;});
-  FILTERS_FORM.querySelectorAll('.map__checkbox').forEach((element) => {element.disabled = true;});
+  addClass(FILTERS_FORM, 'map__filters--disabled');
+  disableFiltersForm(true);
 };
 
 const activateFiltersForm = () => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled');
-  FILTERS_FORM.querySelectorAll('select').forEach((element) => {element.disabled = false;});
-  FILTERS_FORM.querySelectorAll('.map__checkbox').forEach((element) => {element.disabled = false;});
+  removeClass(FILTERS_FORM, 'map__filters--disabled');
+  disableFiltersForm(false);
 };
 
 const deactivateForms = () => {
