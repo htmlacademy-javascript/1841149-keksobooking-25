@@ -1,7 +1,7 @@
 const AD_FORM = document.querySelector('.ad-form');
 const FILTERS_FORM = document.querySelector('.map__filters');
 
-function toggleClass(element,clas){
+function toggleClass(element, clas){
   element.classList.toggle(clas);
 }
 
@@ -16,7 +16,7 @@ const activateAdForm = () => {
 };
 
 const deactivateFiltersForm = () => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled')
+  toggleClass(FILTERS_FORM, 'map__filters--disabled');
   FILTERS_FORM.querySelectorAll('select').forEach((element) => {element.disabled = true;});
   FILTERS_FORM.querySelectorAll('.map__checkbox').forEach((element) => {element.disabled = true;});
 };
