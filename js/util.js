@@ -1,3 +1,7 @@
+const getRoundedRandomNumber = (min, max) => Math.floor(getRandomNumber(min, max));
+const getRandomNumberWithFloat = (min,max,floatNumber = 1) => Number(getRandomNumber(min, max).toFixed(floatNumber));
+const getRandomArrayElement = (elements) => elements[getRoundedRandomNumber(0, elements.length - 1)];
+
 function getRandomNumber(min, max) {
   min = Math.abs(min);
   max = Math.abs(max);
@@ -8,10 +12,6 @@ function getRandomNumber(min, max) {
   }
   return (Math.random() * (max - min + 1) + min);
 }
-
-const getRoundedRandomNumber = (min, max) => Math.floor(getRandomNumber(min, max));
-
-const getRandomNumberWithFloat = (min,max,floatNumber = 1) => Number(getRandomNumber(min, max).toFixed(floatNumber));
 
 function getRandomArray(source) {
   const array = [];
@@ -24,7 +24,5 @@ function getRandomArray(source) {
   }
   return array;
 }
-
-const getRandomArrayElement = (elements) => elements[getRoundedRandomNumber(0, elements.length - 1)];
 
 export {getRoundedRandomNumber, getRandomNumberWithFloat, getRandomArray, getRandomArrayElement};
