@@ -9,34 +9,24 @@ const toggleFormElements = (formElements, value) => {
   formElements.forEach((element) => {element.disabled = value;});
 };
 
-const deactivateAdForm = () => {
-  toggleClass(AD_FORM, 'ad-form--disabled', false);
-  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), true);
+const toggleAdForm = (value) => {
+  toggleClass(AD_FORM, 'ad-form--disabled', value);
+  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), !value);
 };
 
-const activateAdForm = () => {
-  toggleClass(AD_FORM, 'ad-form--disabled', true);
-  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), false);
-};
-
-const deactivateFiltersForm = () => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled', true);
-  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), true);
-};
-
-const activateFiltersForm = () => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled', false);
-  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), false);
+const toggleFiltersForm = (value) => {
+  toggleClass(FILTERS_FORM, 'map__filters--disabled', value);
+  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), value);
 };
 
 const deactivateForms = () => {
-  deactivateAdForm();
-  deactivateFiltersForm();
+  toggleAdForm(true);
+  toggleFiltersForm(true);
 };
 
 const activateForms = () => {
-  activateAdForm();
-  activateFiltersForm();
+  toggleAdForm(false);
+  toggleFiltersForm(false);
 };
 
 export {deactivateForms, activateForms};
