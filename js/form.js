@@ -1,30 +1,32 @@
 const AD_FORM = document.querySelector('.ad-form');
 const FILTERS_FORM = document.querySelector('.map__filters');
 
-const addClass = (element, clas) => {element.classList.add(clas);};
+const toggleClass = (element, className, value) => {
+  element.classList.toggle(className, value);
+};
 
-const removeClass = (element, clas) => {element.classList.remove(clas);};
-
-const disableFormElements = (formElements, value) => {formElements.forEach((element) => {element.disabled = value;});};
+const toggleFormElements = (formElements, value) => {
+  formElements.forEach((element) => {element.disabled = value;});
+};
 
 const deactivateAdForm = () => {
-  addClass(AD_FORM, 'ad-form--disabled');
-  disableFormElements(AD_FORM.querySelectorAll('fieldset'), true);
+  toggleClass(AD_FORM, 'ad-form--disabled', false);
+  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), true);
 };
 
 const activateAdForm = () => {
-  removeClass(AD_FORM, 'ad-form--disabled');
-  disableFormElements(AD_FORM.querySelectorAll('fieldset'), false);
+  toggleClass(AD_FORM, 'ad-form--disabled', true);
+  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), false);
 };
 
 const deactivateFiltersForm = () => {
-  addClass(FILTERS_FORM, 'map__filters--disabled');
-  disableFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), true);
+  toggleClass(FILTERS_FORM, 'map__filters--disabled', true);
+  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), true);
 };
 
 const activateFiltersForm = () => {
-  removeClass(FILTERS_FORM, 'map__filters--disabled');
-  disableFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), false);
+  toggleClass(FILTERS_FORM, 'map__filters--disabled', false);
+  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), false);
 };
 
 const deactivateForms = () => {

@@ -2,6 +2,8 @@ import {OFFERS} from './data.js';
 import {createOffer} from './offer.js';
 import './util.js';
 import {activateForms, deactivateForms } from './form.js';
+deactivateForms();
+
 const fragment = document.createDocumentFragment();
 
 OFFERS.forEach((offer) => fragment.append(createOffer(offer)));
@@ -9,4 +11,3 @@ OFFERS.forEach((offer) => fragment.append(createOffer(offer)));
 document.querySelector('#map-canvas').append(fragment);
 
 activateForms();
-deactivateForms();
