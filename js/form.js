@@ -62,7 +62,7 @@ const handleFileSelect = (evt) => {
 //Разобратсься как выводить превью нескольких изображений
 function handleMultiFileSelect(evt) {
   const files = evt.target.files;
-  for (var i = 0, f; f = files[i]; i++) {
+  for (let i = 0, f; f = files[i]; i++) {
     const reader = new FileReader();
     reader.onload = (function () {
       return function (e) {
