@@ -3,6 +3,7 @@ const form = document.querySelector('.ad-form');
 const price = document.querySelector('#price');
 const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
+const accommodationType = document.querySelector('#type');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -22,7 +23,7 @@ const validateRoomsAndGuests = () => {
   return guestsCount <= roomsCount;
 };
 
-const showPriceValidationError = () => `Минимальная цена должна быть больше ${typePrice[document.querySelector('#type').value]}`;
+const showPriceValidationError = () => `Минимальная цена должна быть больше ${typePrice[accommodationType].value}`;
 
 // Разобраться с валидацией цены (форма валидируется правильно, не правильно показывается сообщение о неправильном минимальном значении) document.querySelector('#type').value
 pristine.addValidator(
