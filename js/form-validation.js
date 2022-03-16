@@ -10,29 +10,26 @@ const pristine = new Pristine(form, {
   errorTextClass: 'ad-form__error-text',
 });
 
-const validatePrice = (value) => {
+const validatePrice = () => {
   const minPrice = typePrice[document.querySelector('#type').value];
-  if (value >= minPrice) {
-    return true;
-  }
-  return false;
+  const priceInput = price.value;
+  return priceInput >= minPrice;
 };
 
 const validateRoomsAndGuests = () => {
   const roomsCount = document.querySelector('#room_number').value;
   const guestsCount = document.querySelector('#capacity').value;
-  if (guestsCount <= roomsCount) {
-    return true;
-  }
-  return false;
+  return guestsCount <= roomsCount;
 };
 
-// Разобраться с валидацией цены (форма валидируется правильно, не правильно показывается сообщение о неправильном минимальном значении)
+// Разобраться с валидацией цены (форма валидируется правильно, не правильно показывается сообщение о неправильном минимальном значении) document.querySelector('#type').value
 pristine.addValidator(
   price,
   validatePrice,
-  `Минимальная цена должна быть больше ${typePrice[document.querySelector('#type').value]}`
+  `Минимальная цена должна быть больше ${document.querySelector('#type').value}`
 );
+
+// 1. При изменении типа жилья меняется и минимальная цена валидации
 
 pristine.addValidator(
   rooms,

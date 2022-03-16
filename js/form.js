@@ -1,4 +1,3 @@
-import { slider } from './slider.js';
 const AD_FORM = document.querySelector('.ad-form');
 const FILTERS_FORM = document.querySelector('.map__filters');
 const price = document.querySelector('#price');
