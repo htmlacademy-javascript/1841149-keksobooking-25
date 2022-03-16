@@ -48,43 +48,52 @@ const activateForms = () => {
   toggleFiltersForm(false);
 };
 
-const handleFileSelect = (evt) => {
-  const file = evt.target.files;
-  const f = file[0];
+//Подумать над этими функциями
+const createImage = (files) => {
   const reader = new FileReader();
-  reader.onload = (function() {
-    return function(e) {
-      preview.innerHTML = `<img width='40' height='44' src='${e.target.result}'/>`;
-    };
-  })(f);
-  reader.readAsDataURL(f);
-};
-//Разобратсься как выводить превью нескольких изображений
-function handleMultiFileSelect(evt) {
-  const files = evt.target.files;
-  for (let i = 0, f; f = files[i]; i++) {
-    const reader = new FileReader();
-    reader.onload = (function () {
-      return function (e) {
-        const div = document.createElement('div');
-        div.classList.add('ad-form__photo');
-        div.innerHTML = `<img width='60' height='60' src='${e.target.result}'/>`;
-        photosContainer.insertBefore(div, null);
-      };
-    })(f);
-    reader.readAsDataURL(f);
+  const div = document.createElement('div');
+  const photo = document.createElement('img');
+  div.classList.add('ad-form__photo');
+  reader.addEventListener('load', () => {
+    photo.src = reader.result;
+    div.append(photo);
+    photosContainer.append(div);
+  });
+  if (files) {
+    return reader.readAsDataURL(files);
   }
-}
-//Код двух функций взят из https://xn--d1acnqm.xn--j1amh/%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B8/%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4-%D0%BF%D1%80%D0%B5%D0%B2%D1%8C%D1%8E-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BF%D0%B5%D1%80%D0%B5%D0%B4-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%BE%D0%B9-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-javascript-%D0%B8-html5-filereader
+  photo.src = 'img/muffin-grey.svg';
+};
 
-price.addEventListener('change', () => {
-  slider.noUiSlider.set(this.value);
-});
+const createAvatar = (file) => {
+  const avatarImg = preview.querySelector('img');
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    avatarImg.src = reader.result;
+  });
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+  avatarImg.src = 'img/muffin-grey.svg';
+};
+
+const handleFileSelect = (evt) => {
+  const file = evt.target.files[0];
+  createAvatar(file);
+};
+
+const handleMultiFileSelect = (evt) => {
+  const files = evt.target.files;
+  for(let i = 0; i <= files.length; i++) {
+    createImage(files[i]);
+  }
+};
+
+// 4. Сделать дроп зону
 
 type.addEventListener('change', () => {
   price.placeholder = typePrice[type.value];
   price.min = typePrice[type.value];
-  slider.noUiSlider.set(typePrice[type.value]);
 });
 
 timeIn.addEventListener('change', () => {
@@ -93,22 +102,6 @@ timeIn.addEventListener('change', () => {
 
 timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
-});
-
-rooms.addEventListener('change', () => {
-  if (rooms.value === '100') {
-    guests.value = '0';
-    return;
-  }
-  guests.value = rooms.value;
-});
-
-guests.addEventListener('change', () => {
-  if (guests.value === '0') {
-    rooms.value = '100';
-    return;
-  }
-  rooms.value = guests.value;
 });
 
 avatar.addEventListener('change', handleFileSelect, false);
