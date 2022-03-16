@@ -22,11 +22,13 @@ const validateRoomsAndGuests = () => {
   return guestsCount <= roomsCount;
 };
 
+const showPriceValidationError = () => `Минимальная цена должна быть больше ${typePrice[document.querySelector('#type').value]}`;
+
 // Разобраться с валидацией цены (форма валидируется правильно, не правильно показывается сообщение о неправильном минимальном значении) document.querySelector('#type').value
 pristine.addValidator(
   price,
   validatePrice,
-  `Минимальная цена должна быть больше ${document.querySelector('#type').value}`
+  showPriceValidationError
 );
 
 // 1. При изменении типа жилья меняется и минимальная цена валидации
