@@ -13,7 +13,7 @@ const pristine = new Pristine(form, {
 
 const validatePrice = () => price.value >= typePrice[accommodationType.value];
 
-const validateRoomsAndGuests = () => guests.value <= rooms.value;
+const validateRoomsAndGuests = () => Number(guests.value) <= Number(rooms.value);
 
 const showPriceValidationError = () => `Минимальная цена должна быть больше ${typePrice[accommodationType.value]}`;
 
