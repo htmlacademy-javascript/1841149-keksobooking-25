@@ -12,14 +12,14 @@ const pristine = new Pristine(form, {
 });
 
 const validatePrice = () => {
-  const minPrice = typePrice[document.querySelector('#type').value];
+  const minPrice = typePrice[accommodationType.value];
   const priceInput = price.value;
   return priceInput >= minPrice;
 };
 
 const validateRoomsAndGuests = () => {
-  const roomsCount = document.querySelector('#room_number').value;
-  const guestsCount = document.querySelector('#capacity').value;
+  const roomsCount = rooms.value;
+  const guestsCount = guests.value;
   return guestsCount <= roomsCount;
 };
 
