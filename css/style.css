@@ -346,6 +346,7 @@ fieldset {
 }
 
 .ad-form__element {
+  position: relative;
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
   min-height: 90px;
@@ -1052,4 +1053,29 @@ fieldset {
 
 .hidden {
   display: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.ad-form__error-text {
+  position: absolute;
+  margin-right: 5px;
+  padding: 5px;
+  background-color: #ffffff;
+  color: tomato;
+  border: 1px solid #7e7e7e;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.ad-form__slider {
+  margin: 30px 0;
+}
+
+.ad-form__slider + .ad-form__error-text {
+  left: 0;
+  bottom: -5px;
+  width: max-content;
 }
