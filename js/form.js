@@ -8,8 +8,10 @@ const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
 const avatar = document.querySelector('#avatar');
 const preview = document.querySelector('.ad-form-header__preview');
+const avatarImg = preview.querySelector('img');
 const photos = document.querySelector('#images');
 const photosContainer = document.querySelector('.ad-form__photo-container');
+const resetBtn = document.querySelector('.ad-form__reset');
 const typePrice = {
   flat: 1000,
   bungalow: 0,
@@ -47,12 +49,12 @@ const activateForms = () => {
   toggleFiltersForm(false);
 };
 
-//Подумать над этими функциями
 const createImage = (files) => {
   const reader = new FileReader();
   const div = document.createElement('div');
   const photo = document.createElement('img');
   div.classList.add('ad-form__photo');
+  div.classList.add('photo');
   reader.addEventListener('load', () => {
     photo.src = reader.result;
     div.append(photo);
@@ -65,7 +67,6 @@ const createImage = (files) => {
 };
 
 const createAvatar = (file) => {
-  const avatarImg = preview.querySelector('img');
   const reader = new FileReader();
   reader.addEventListener('load', () => {
     avatarImg.src = reader.result;
@@ -87,6 +88,17 @@ const handleMultiFileSelect = (evt) => {
     createImage(files[i]);
   }
 };
+
+const resetForm = () => {
+  AD_FORM.reset();
+  avatar.files.value = 'img/muffin-grey.svg';
+  avatarImg.src = 'img/muffin-grey.svg';
+  photos.files.value = '';
+  const userPhotos = document.querySelectorAll('.photo');
+  userPhotos.forEach(element => element.remove())
+}
+
+resetBtn.addEventListener('click', resetForm)
 
 // 4. Сделать дроп зону
 
