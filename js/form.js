@@ -1,5 +1,5 @@
-const AD_FORM = document.querySelector('.ad-form');
-const FILTERS_FORM = document.querySelector('.map__filters');
+const adForm = document.querySelector('.ad-form');
+const filtersForm = document.querySelector('.map__filters');
 const price = document.querySelector('#price');
 const type = document.querySelector('#type');
 const timeIn = document.querySelector('#timein');
@@ -30,13 +30,13 @@ const toggleFormElements = (formElements, value) => {
 };
 
 const toggleAdForm = (value) => {
-  toggleClass(AD_FORM, 'ad-form--disabled', value);
-  toggleFormElements(AD_FORM.querySelectorAll('fieldset'), value);
+  toggleClass(adForm, 'ad-form--disabled', value);
+  toggleFormElements(adForm.querySelectorAll('fieldset'), value);
 };
 
 const toggleFiltersForm = (value) => {
-  toggleClass(FILTERS_FORM, 'map__filters--disabled', value);
-  toggleFormElements(FILTERS_FORM.querySelectorAll('select, .map__features'), value);
+  toggleClass(filtersForm, 'map__filters--disabled', value);
+  toggleFormElements(filtersForm.querySelectorAll('select, .map__features'), value);
 };
 
 const deactivateForms = () => {
@@ -90,7 +90,7 @@ const handleMultiFileSelect = (evt) => {
 };
 
 const resetForm = () => {
-  AD_FORM.reset();
+  adForm.reset();
   avatar.files.value = 'img/muffin-grey.svg';
   avatarImg.src = 'img/muffin-grey.svg';
   photos.files.value = '';
