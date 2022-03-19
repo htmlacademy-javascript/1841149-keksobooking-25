@@ -1,6 +1,14 @@
 import { activateForms, deactivateForms } from './form.js';
 import { createOffer } from './offer.js';
 import { OFFERS } from './data.js';
+const mainPinSize = [52, 52];
+const mainPinAnchorPosition = [26, 52];
+const adPinSize = [40, 40];
+const adPinAnchorPosition = [20, 40];
+const basicLat = 35.6938;
+const basicLng = 139.7034;
+const basicMapScaling = 10;
+const decimalPlace = 5;
 
 const adress = document.querySelector('#address');
 deactivateForms();
@@ -10,9 +18,9 @@ const map = L.map('map-canvas')
     activateForms();
   })
   .setView({
-    lat: 35.6938,
-    lng: 139.7034,
-  }, 10);
+    lat: basicLat,
+    lng: basicLng,
+  }, basicMapScaling );
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -23,20 +31,20 @@ L.tileLayer(
 
 const mainPinMarker = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: mainPinSize,
+  iconAnchor: mainPinAnchorPosition,
 });
 
 const adPin = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: adPinSize,
+  iconAnchor: adPinAnchorPosition,
 });
 
 const marker = L.marker(
   {
-    lat: 35.6938,
-    lng: 139.7034,
+    lat: basicLat,
+    lng: basicLng,
   },
   {
     draggable: true,
@@ -66,7 +74,7 @@ marker.addTo(map);
 
 marker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
-  adress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
+  adress.value = `${coordinates.lat.toFixed(decimalPlace)}, ${coordinates.lng.toFixed(decimalPlace)}`;
 });
 
 OFFERS.forEach((point) => {
