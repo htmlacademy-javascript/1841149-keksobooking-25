@@ -1,14 +1,18 @@
 import { activateForms, deactivateForms } from './form.js';
 import { createOffer } from './offer.js';
 import { OFFERS } from './data.js';
-const mainPinSize = [52, 52];
-const mainPinAnchorPosition = [26, 52];
-const adPinSize = [40, 40];
-const adPinAnchorPosition = [20, 40];
-const basicLat = 35.6938;
-const basicLng = 139.7034;
-const basicMapScaling = 10;
-const decimalPlace = 5;
+const MAIN_PIN_HEIGHT = 52;
+const MAIN_PIN_WIDTH = 52;
+const MAIN_PIN_ANCHOR_HEIGHT_POSITION = 26;
+const MAIN_PIN_ANCHOR_WIDTH_POSITION = 52;
+const AD_PIN_HEIGHT = 40;
+const AD_PIN_WIDTH = 40;
+const AD_PIN_ANCHOR_HEIGHT_POSITION = 20;
+const AD_PIN_ANCHOR_WIDTH_POSITION = 40;
+const BASIC_LAT = 35.6938;
+const BASIC_LNG = 139.7034;
+const BASIC_MAP_SCALING = 10;
+const DECIMAL_PLACE = 5;
 
 const adress = document.querySelector('#address');
 deactivateForms();
@@ -18,9 +22,9 @@ const map = L.map('map-canvas')
     activateForms();
   })
   .setView({
-    lat: basicLat,
-    lng: basicLng,
-  }, basicMapScaling );
+    lat: BASIC_LAT,
+    lng: BASIC_LNG,
+  }, BASIC_MAP_SCALING);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -31,20 +35,20 @@ L.tileLayer(
 
 const mainPinMarker = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: mainPinSize,
-  iconAnchor: mainPinAnchorPosition,
+  iconSize: [MAIN_PIN_HEIGHT, MAIN_PIN_WIDTH],
+  iconAnchor: [MAIN_PIN_ANCHOR_HEIGHT_POSITION, MAIN_PIN_ANCHOR_WIDTH_POSITION],
 });
 
 const adPin = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: adPinSize,
-  iconAnchor: adPinAnchorPosition,
+  iconSize: [AD_PIN_HEIGHT, AD_PIN_WIDTH],
+  iconAnchor: [AD_PIN_ANCHOR_HEIGHT_POSITION, AD_PIN_ANCHOR_WIDTH_POSITION],
 });
 
 const marker = L.marker(
   {
-    lat: basicLat,
-    lng: basicLng,
+    lat: BASIC_LAT,
+    lng: BASIC_LNG,
   },
   {
     draggable: true,
@@ -74,7 +78,7 @@ marker.addTo(map);
 
 marker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
-  adress.value = `${coordinates.lat.toFixed(decimalPlace)}, ${coordinates.lng.toFixed(decimalPlace)}`;
+  adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
 OFFERS.forEach((point) => {
