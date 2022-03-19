@@ -1,14 +1,8 @@
 import { activateForms, deactivateForms } from './form.js';
 import { createOffer } from './offer.js';
 import { OFFERS } from './data.js';
-const MAIN_PIN_HEIGHT = 52;
-const MAIN_PIN_WIDTH = 52;
-const MAIN_PIN_ANCHOR_HEIGHT_POSITION = 26;
-const MAIN_PIN_ANCHOR_WIDTH_POSITION = 52;
-const AD_PIN_HEIGHT = 40;
-const AD_PIN_WIDTH = 40;
-const AD_PIN_ANCHOR_HEIGHT_POSITION = 20;
-const AD_PIN_ANCHOR_WIDTH_POSITION = 40;
+const MAIN_PIN_SIZE = 52;
+const AD_PIN_SIZE = 40;
 const BASIC_LAT = 35.6938;
 const BASIC_LNG = 139.7034;
 const BASIC_MAP_SCALING = 10;
@@ -35,14 +29,14 @@ L.tileLayer(
 
 const mainPinMarker = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: [MAIN_PIN_HEIGHT, MAIN_PIN_WIDTH],
-  iconAnchor: [MAIN_PIN_ANCHOR_HEIGHT_POSITION, MAIN_PIN_ANCHOR_WIDTH_POSITION],
+  iconSize: [MAIN_PIN_SIZE, MAIN_PIN_SIZE],
+  iconAnchor: [MAIN_PIN_SIZE/2, MAIN_PIN_SIZE],
 });
 
 const adPin = L.icon({
   iconUrl: '../img/main-pin.svg',
-  iconSize: [AD_PIN_HEIGHT, AD_PIN_WIDTH],
-  iconAnchor: [AD_PIN_ANCHOR_HEIGHT_POSITION, AD_PIN_ANCHOR_WIDTH_POSITION],
+  iconSize: [AD_PIN_SIZE, AD_PIN_SIZE],
+  iconAnchor: [AD_PIN_SIZE/2, AD_PIN_SIZE],
 });
 
 const marker = L.marker(
