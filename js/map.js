@@ -69,4 +69,6 @@ marker.on('moveend', (evt) => {
   adress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 });
 
-OFFERS.forEach((point) => {createMarker(point)});
+OFFERS.forEach((point) => {
+  createMarker(point);
+});
