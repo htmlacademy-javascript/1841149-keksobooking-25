@@ -95,10 +95,10 @@ const resetForm = () => {
   avatarImg.src = 'img/muffin-grey.svg';
   photos.files.value = '';
   const userPhotos = document.querySelectorAll('.photo');
-  userPhotos.forEach(element => element.remove())
-}
+  userPhotos.forEach((element) => element.remove());
+};
 
-resetBtn.addEventListener('click', resetForm)
+resetBtn.addEventListener('click', resetForm);
 
 // 4. Сделать дроп зону
 

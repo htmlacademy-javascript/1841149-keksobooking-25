@@ -12,7 +12,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: 35.6938,
     lng: 139.7034,
-  }, 10)
+  }, 10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -58,11 +58,11 @@ const createMarker = (point) => {
     },
   );
   adMarker
-  .addTo(markerGroup)
-  .bindPopup(createOffer(point))
-}
+    .addTo(markerGroup)
+    .bindPopup(createOffer(point));
+};
 
-marker.addTo(map)
+marker.addTo(map);
 
 marker.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
