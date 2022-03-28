@@ -1,15 +1,21 @@
-import { onPopupEscKeydown } from './util.js';
+import { onSuccessPopupEscKeydown, onErrorPopupEscKeydown } from './util.js';
 let message;
 
 const closePopup = (elementClassName) => {
   document.querySelector(`.${elementClassName}`).remove();
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  if (elementClassName === 'error') {
+    return document.removeEventListener('keydown', onErrorPopupEscKeydown);
+  }
+  document.removeEventListener('keydown', onSuccessPopupEscKeydown);
 };
 
 const onPopupClick = (elementClassName) => {
   document.body.append(message);
   document.querySelector(`.${elementClassName}`).addEventListener('click', () => closePopup(elementClassName));
-  document.addEventListener('keydown', () => onPopupEscKeydown(event, `${elementClassName}`));
+  if (elementClassName === 'error') {
+    return document.addEventListener('keydown', onErrorPopupEscKeydown);
+  }
+  document.addEventListener('keydown', onSuccessPopupEscKeydown);
 };
 
 const successPopup = () => {

@@ -24,11 +24,18 @@ const showError = (error) => {
   }, ERROR_SHOW_TIME);
 };
 
-const onPopupEscKeydown = (event, elementClassName) => {
-  if (isEscapeKey(event)) {
-    event.preventDefault();
-    closePopup(elementClassName);
+const onErrorPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePopup('error');
   }
 };
 
-export { isEscapeKey, showError, onPopupEscKeydown };
+const onSuccessPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePopup('success');
+  }
+};
+
+export { isEscapeKey, showError, onErrorPopupEscKeydown, onSuccessPopupEscKeydown };
