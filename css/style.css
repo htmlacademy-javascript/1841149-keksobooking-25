@@ -1079,3 +1079,10 @@ textarea {
   bottom: -5px;
   width: max-content;
 }
+
+.noUi-tooltip {
+  display: none;
+}
+.noUi-active .noUi-tooltip {
+  display: block;
+}

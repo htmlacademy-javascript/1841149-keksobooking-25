@@ -1,16 +1,12 @@
 import './util.js';
 import './slider.js';
-import './form-validation.js';
-import './map.js';
+import { setUserFromSubmit } from './form-validation.js';
+import { createMarker } from './map.js';
+import { openPopup } from './popup.js';
+import { getData } from './api.js';
 
-/*
-1. Поправит отступы у слайдера
-2. Поправить стилизацию ошибок
-3. Настроить слайдер
-  3.1 В зависимости от типа жилья менятся максимальное и минимальное значение слайдера
-  3.2 Слайдер не должен прыгать
-4. Попробовать переписать валидацию комнат и гостей с использованием метода includes
-5. Подключить карту
-6. Реализовать кнопку очистки формы
+getData((offers) => {
+  offers.slice(0, 10).forEach((point) => createMarker(point));
+}, () => openPopup('error'));
 
-*/
+setUserFromSubmit(() => openPopup('success'))

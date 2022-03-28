@@ -118,4 +118,4 @@ timeOut.addEventListener('change', () => {
 avatar.addEventListener('change', handleFileSelect, false);
 photos.addEventListener('change', handleMultiFileSelect, false);
 
-export { deactivateForms, activateForms, price, typePrice };
+export { deactivateForms, activateForms, price, typePrice, resetForm };

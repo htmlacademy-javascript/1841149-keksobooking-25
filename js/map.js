@@ -1,11 +1,10 @@
 import { activateForms, deactivateForms } from './form.js';
 import { createOffer } from './offer.js';
-import { OFFERS } from './data.js';
 const MAIN_PIN_SIZE = 52;
 const AD_PIN_SIZE = 40;
 const BASIC_LAT = 35.6938;
 const BASIC_LNG = 139.7034;
-const BASIC_MAP_SCALING = 10;
+const BASIC_MAP_SCALING = 13;
 const DECIMAL_PLACE = 5;
 
 const adress = document.querySelector('#address');
@@ -75,6 +74,4 @@ marker.on('moveend', (evt) => {
   adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
-OFFERS.forEach((point) => {
-  createMarker(point);
-});
+export { createMarker };

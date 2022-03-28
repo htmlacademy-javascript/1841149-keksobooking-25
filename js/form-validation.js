@@ -1,9 +1,13 @@
-import { typePrice } from './form.js';
+import { sendData } from './api.js';
+import { typePrice, resetForm } from './form.js';
+import { showError } from './util.js';
+
 const form = document.querySelector('.ad-form');
 const price = document.querySelector('#price');
 const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
 const accommodationType = document.querySelector('#type');
+const submitButton = document.querySelector('.ad-form__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -31,9 +35,35 @@ pristine.addValidator(
   'Количество гостей должно быть меньше или равно количеству комнат'
 );
 
-form.addEventListener('submit', (evt) => {
-  if(pristine.validate()) {
-    return true;
-  }
-  evt.preventDefault();
-});
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
+const setUserFromSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate()
+    if(isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          showError('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
+        new FormData(evt.target)
+      );
+    }
+  });
+}
+
+export { setUserFromSubmit };
