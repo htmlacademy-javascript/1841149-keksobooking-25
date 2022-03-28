@@ -1,11 +1,4 @@
-import { isEscapeKey } from "./util.js";
-
-const onPopupEscKeydown = (event, elementClassName) => {
-  if (isEscapeKey(event)) {
-    event.preventDefault();
-    closePopup(elementClassName);
-  }
-};
+import { onPopupEscKeydown } from './util.js';
 
 const closePopup = (elementClassName) => {
   document.querySelector(`.${elementClassName}`).remove();

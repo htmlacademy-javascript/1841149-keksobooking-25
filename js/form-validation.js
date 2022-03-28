@@ -1,6 +1,5 @@
 import { sendData } from './api.js';
 import { typePrice } from './form.js';
-import { showError } from './util.js';
 
 const form = document.querySelector('.ad-form');
 const price = document.querySelector('#price');
@@ -45,10 +44,10 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const setUserFromSubmit = (onSuccessm, onFail) => {
+const setUserFromSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate()
+    const isValid = pristine.validate();
     if(isValid) {
       blockSubmitButton();
       sendData(
@@ -64,6 +63,6 @@ const setUserFromSubmit = (onSuccessm, onFail) => {
       );
     }
   });
-}
+};
 
 export { setUserFromSubmit };

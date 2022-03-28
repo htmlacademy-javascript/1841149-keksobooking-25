@@ -1,7 +1,7 @@
+import { closePopup } from './popup.js';
 const ERROR_SHOW_TIME = 5000;
-const isEscapeKey = (evt) => {
-  return evt.key === 'Escape';
-};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showError = (error) => {
   const errorContainer = document.createElement('div');
@@ -22,6 +22,13 @@ const showError = (error) => {
   setTimeout(() => {
     errorContainer.remove();
   }, ERROR_SHOW_TIME);
-}
+};
 
-export { isEscapeKey, showError };
+const onPopupEscKeydown = (event, elementClassName) => {
+  if (isEscapeKey(event)) {
+    event.preventDefault();
+    closePopup(elementClassName);
+  }
+};
+
+export { isEscapeKey, showError, onPopupEscKeydown };
