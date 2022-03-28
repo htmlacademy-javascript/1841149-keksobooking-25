@@ -1,8 +1,8 @@
 import { isEscapeKey } from "./util.js";
 
-const onPopupEscKeydown = (evt, elementClassName) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
+const onPopupEscKeydown = (event, elementClassName) => {
+  if (isEscapeKey(event)) {
+    event.preventDefault();
     closePopup(elementClassName);
   }
 };
@@ -17,7 +17,7 @@ const openPopup = (elementClassName) => {
   const message = messageTemplate.cloneNode(true);
   document.body.append(message);
   document.querySelector(`.${elementClassName}`).addEventListener('click', () => closePopup(elementClassName));
-  document.addEventListener('keydown', () => onPopupEscKeydown(evt, `${elementClassName}`));
+  document.addEventListener('keydown', () => onPopupEscKeydown(event, `${elementClassName}`));
 };
 
 export { openPopup, closePopup };

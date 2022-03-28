@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import { typePrice, resetForm } from './form.js';
+import { typePrice } from './form.js';
 import { showError } from './util.js';
 
 const form = document.querySelector('.ad-form');
@@ -45,7 +45,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const setUserFromSubmit = (onSuccess) => {
+const setUserFromSubmit = (onSuccessm, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate()
@@ -57,7 +57,7 @@ const setUserFromSubmit = (onSuccess) => {
           unblockSubmitButton();
         },
         () => {
-          showError('Не удалось отправить форму. Попробуйте ещё раз');
+          onFail();
           unblockSubmitButton();
         },
         new FormData(evt.target)
