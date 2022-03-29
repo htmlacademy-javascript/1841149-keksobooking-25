@@ -5,18 +5,18 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 const onDocumentEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    onPopupAndDocument();
+    onDocumentClick();
   }
 };
 
-function onPopupAndDocument() {
+function onDocumentClick() {
   document.querySelector('.popup').remove();
   document.removeEventListener('keydown', onDocumentEscKeydown);
 }
 
 const showPopup = () => {
   document.body.append(message);
-  document.querySelector('.popup').addEventListener('click', onPopupAndDocument);
+  document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onDocumentEscKeydown);
 };
 
