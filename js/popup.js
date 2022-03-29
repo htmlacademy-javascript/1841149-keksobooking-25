@@ -14,20 +14,20 @@ function closePopup() {
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-const onPopupClick = (elementClassName) => {
+const onPopupClick = () => {
   document.body.append(message);
-  document.querySelector(`.${elementClassName}`).addEventListener('click', closePopup);
+  document.querySelector('.popup').addEventListener('click', closePopup);
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const successPopup = () => {
   message = document.querySelector('#success').content.cloneNode(true);
-  onPopupClick('success');
+  onPopupClick();
 };
 
 const errorPopup = () => {
   message = document.querySelector('#error').content.cloneNode(true);
-  onPopupClick('error');
+  onPopupClick();
 };
 
 export { successPopup, errorPopup, closePopup };
