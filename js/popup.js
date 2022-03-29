@@ -12,6 +12,7 @@ const onDocumentEscKeydown = (evt) => {
 function onDocumentClick() {
   document.querySelector('.popup').remove();
   document.removeEventListener('keydown', onDocumentEscKeydown);
+  document.removeEventListener('click', onDocumentClick);
 }
 
 const showPopup = () => {
