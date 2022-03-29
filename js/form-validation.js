@@ -1,6 +1,5 @@
 import { sendData } from './api.js';
-import { typePrice } from './form.js';
-import { blockSubmitButton, unblockSubmitButton } from './util.js';
+import { typePrice, blockSubmitButton, unblockSubmitButton } from './form.js';
 
 const form = document.querySelector('.ad-form');
 const price = document.querySelector('#price');

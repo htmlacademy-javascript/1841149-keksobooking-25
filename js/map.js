@@ -32,11 +32,11 @@ const toggleForms = (value) => {
 };
 
 const adress = document.querySelector('#address');
-toggleForms(false);
+toggleForms(true);
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    toggleForms(true);
+    toggleForms(false);
   })
   .setView({
     lat: BASIC_LAT,
@@ -91,6 +91,13 @@ const createMarker = (point) => {
     .bindPopup(createOffer(point));
 };
 
+const resetMarker = () => {
+  marker.setLatLng({
+    lat: BASIC_LAT,
+    lng: BASIC_LNG,
+  });
+};
+
 marker.addTo(map);
 
 marker.on('moveend', (evt) => {
@@ -98,4 +105,4 @@ marker.on('moveend', (evt) => {
   adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
-export { createMarker, marker, adForm, BASIC_LAT, BASIC_LNG };
+export { createMarker, marker, adForm, resetMarker };

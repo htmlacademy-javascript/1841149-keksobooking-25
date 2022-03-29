@@ -2,32 +2,32 @@ let message;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const onPopupEscKeydown = (evt) => {
+const onDocumentEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closePopup();
+    onPopupAndDocument();
   }
 };
 
-function closePopup() {
+function onPopupAndDocument() {
   document.querySelector('.popup').remove();
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('keydown', onDocumentEscKeydown);
 }
 
-const onPopupClick = () => {
+const showPopup = () => {
   document.body.append(message);
-  document.querySelector('.popup').addEventListener('click', closePopup);
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.querySelector('.popup').addEventListener('click', onPopupAndDocument);
+  document.addEventListener('keydown', onDocumentEscKeydown);
 };
 
 const successPopup = () => {
   message = document.querySelector('#success').content.cloneNode(true);
-  onPopupClick();
+  showPopup();
 };
 
 const errorPopup = () => {
   message = document.querySelector('#error').content.cloneNode(true);
-  onPopupClick();
+  showPopup();
 };
 
-export { successPopup, errorPopup, closePopup };
+export { successPopup, errorPopup };

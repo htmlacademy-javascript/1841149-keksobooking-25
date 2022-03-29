@@ -1,5 +1,19 @@
 import { resetForm } from './form.js';
 
+const ERROR_SHOW_TIME = 5000;
+
+const showError = (error) => {
+  const errorContainer = document.createElement('div');
+  errorContainer.classList.add('error-container');
+  errorContainer.textContent = error;
+
+  document.body.append(errorContainer);
+
+  setTimeout(() => {
+    errorContainer.remove();
+  }, ERROR_SHOW_TIME);
+};
+
 const getData = (onSuccess, onFail) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
@@ -30,4 +44,4 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-export { getData, sendData };
+export { getData, sendData, showError };

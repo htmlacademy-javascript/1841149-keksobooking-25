@@ -4,7 +4,7 @@ import './slider.js';
 import { setUserFromSubmit } from './form-validation.js';
 import { createMarker } from './map.js';
 import { successPopup, errorPopup } from './popup.js';
-import { getData } from './api.js';
+import { getData, showError } from './api.js';
 const OFFERS_COUNT = 10;
 
 

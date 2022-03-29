@@ -1,4 +1,4 @@
-import { marker, adForm, BASIC_LAT, BASIC_LNG } from './map.js';
+import { adForm, resetMarker } from './map.js';
 const price = document.querySelector('#price');
 const type = document.querySelector('#type');
 const timeIn = document.querySelector('#timein');
@@ -11,6 +11,7 @@ const avatarImg = preview.querySelector('img');
 const photos = document.querySelector('#images');
 const photosContainer = document.querySelector('.ad-form__photo-container');
 const resetBtn = document.querySelector('.ad-form__reset');
+const submitButton = document.querySelector('.ad-form__submit');
 const typePrice = {
   flat: 1000,
   bungalow: 0,
@@ -67,10 +68,17 @@ const resetForm = () => {
   photos.files.value = '';
   const userPhotos = document.querySelectorAll('.photo');
   userPhotos.forEach((element) => element.remove());
-  marker.setLatLng({
-    lat: BASIC_LAT,
-    lng: BASIC_LNG,
-  });
+  resetMarker();
+};
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
 };
 
 resetBtn.addEventListener('click', resetForm);
@@ -93,4 +101,4 @@ timeOut.addEventListener('change', () => {
 avatar.addEventListener('change', handleFileSelect, false);
 photos.addEventListener('change', handleMultiFileSelect, false);
 
-export { price, typePrice, resetForm };
+export { price, typePrice, resetForm, blockSubmitButton, unblockSubmitButton };
