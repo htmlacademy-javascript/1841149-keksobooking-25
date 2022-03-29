@@ -26,22 +26,17 @@ const toggleFiltersForm = (value) => {
   toggleFormElements(filtersForm.querySelectorAll('select, .map__features'), value);
 };
 
-const deactivateForms = () => {
-  toggleAdForm(true);
-  toggleFiltersForm(true);
-};
-
-const activateForms = () => {
-  toggleAdForm(false);
-  toggleFiltersForm(false);
+const toggleForms = (value) => {
+  toggleAdForm(value);
+  toggleFiltersForm(value);
 };
 
 const adress = document.querySelector('#address');
-deactivateForms();
+toggleForms(false);
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    activateForms();
+    toggleForms(true);
   })
   .setView({
     lat: BASIC_LAT,
