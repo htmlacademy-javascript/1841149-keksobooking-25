@@ -1,12 +1,12 @@
 import { sendData } from './api.js';
 import { typePrice } from './form.js';
+import { blockSubmitButton, unblockSubmitButton } from './util.js';
 
 const form = document.querySelector('.ad-form');
 const price = document.querySelector('#price');
 const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
 const accommodationType = document.querySelector('#type');
-const submitButton = document.querySelector('.ad-form__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -33,16 +33,6 @@ pristine.addValidator(
   validateRoomsAndGuests,
   'Количество гостей должно быть меньше или равно количеству комнат'
 );
-
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Отправляю...';
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
-};
 
 const setUserFromSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {

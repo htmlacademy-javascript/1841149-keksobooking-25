@@ -1,13 +1,28 @@
-import { onSuccessPopupEscKeydown, onErrorPopupEscKeydown } from './util.js';
 let message;
 
-const closePopup = (elementClassName) => {
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const onErrorPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePopup('error');
+  }
+};
+
+const onSuccessPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closePopup('success');
+  }
+};
+
+function closePopup (elementClassName) {
   document.querySelector(`.${elementClassName}`).remove();
   if (elementClassName === 'error') {
     return document.removeEventListener('keydown', onErrorPopupEscKeydown);
   }
   document.removeEventListener('keydown', onSuccessPopupEscKeydown);
-};
+}
 
 const onPopupClick = (elementClassName) => {
   document.body.append(message);

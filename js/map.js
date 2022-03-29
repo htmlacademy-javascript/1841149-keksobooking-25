@@ -1,4 +1,3 @@
-import { activateForms, deactivateForms } from './form.js';
 import { createOffer } from './offer.js';
 const MAIN_PIN_SIZE = 52;
 const AD_PIN_SIZE = 40;
@@ -6,6 +5,36 @@ const BASIC_LAT = 35.6938;
 const BASIC_LNG = 139.7034;
 const BASIC_MAP_SCALING = 13;
 const DECIMAL_PLACE = 5;
+const adForm = document.querySelector('.ad-form');
+const filtersForm = document.querySelector('.map__filters');
+
+const toggleClass = (element, className, value) => {
+  element.classList.toggle(className, value);
+};
+
+const toggleFormElements = (formElements, value) => {
+  formElements.forEach((element) => {element.disabled = value;});
+};
+
+const toggleAdForm = (value) => {
+  toggleClass(adForm, 'ad-form--disabled', value);
+  toggleFormElements(adForm.querySelectorAll('fieldset'), value);
+};
+
+const toggleFiltersForm = (value) => {
+  toggleClass(filtersForm, 'map__filters--disabled', value);
+  toggleFormElements(filtersForm.querySelectorAll('select, .map__features'), value);
+};
+
+const deactivateForms = () => {
+  toggleAdForm(true);
+  toggleFiltersForm(true);
+};
+
+const activateForms = () => {
+  toggleAdForm(false);
+  toggleFiltersForm(false);
+};
 
 const adress = document.querySelector('#address');
 deactivateForms();
@@ -74,4 +103,4 @@ marker.on('moveend', (evt) => {
   adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
-export { createMarker };
+export { createMarker, marker, adForm, BASIC_LAT, BASIC_LNG };

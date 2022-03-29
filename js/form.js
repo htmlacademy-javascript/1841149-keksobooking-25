@@ -1,5 +1,4 @@
-const adForm = document.querySelector('.ad-form');
-const filtersForm = document.querySelector('.map__filters');
+import { marker, adForm, BASIC_LAT, BASIC_LNG } from './map.js';
 const price = document.querySelector('#price');
 const type = document.querySelector('#type');
 const timeIn = document.querySelector('#timein');
@@ -20,34 +19,6 @@ const typePrice = {
   hotel: 3000
 };
 guests.value = rooms.value;
-
-const toggleClass = (element, className, value) => {
-  element.classList.toggle(className, value);
-};
-
-const toggleFormElements = (formElements, value) => {
-  formElements.forEach((element) => {element.disabled = value;});
-};
-
-const toggleAdForm = (value) => {
-  toggleClass(adForm, 'ad-form--disabled', value);
-  toggleFormElements(adForm.querySelectorAll('fieldset'), value);
-};
-
-const toggleFiltersForm = (value) => {
-  toggleClass(filtersForm, 'map__filters--disabled', value);
-  toggleFormElements(filtersForm.querySelectorAll('select, .map__features'), value);
-};
-
-const deactivateForms = () => {
-  toggleAdForm(true);
-  toggleFiltersForm(true);
-};
-
-const activateForms = () => {
-  toggleAdForm(false);
-  toggleFiltersForm(false);
-};
 
 const createImage = (files) => {
   const reader = new FileReader();
@@ -96,6 +67,10 @@ const resetForm = () => {
   photos.files.value = '';
   const userPhotos = document.querySelectorAll('.photo');
   userPhotos.forEach((element) => element.remove());
+  marker.setLatLng({
+    lat: BASIC_LAT,
+    lng: BASIC_LNG,
+  });
 };
 
 resetBtn.addEventListener('click', resetForm);
@@ -118,4 +93,4 @@ timeOut.addEventListener('change', () => {
 avatar.addEventListener('change', handleFileSelect, false);
 photos.addEventListener('change', handleMultiFileSelect, false);
 
-export { deactivateForms, activateForms, price, typePrice, resetForm };
+export { price, typePrice, resetForm };

@@ -1,20 +1,9 @@
-import { closePopup } from './popup.js';
 const ERROR_SHOW_TIME = 5000;
-
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const submitButton = document.querySelector('.ad-form__submit');
 
 const showError = (error) => {
   const errorContainer = document.createElement('div');
-  errorContainer.style.zIndex = 100;
-  errorContainer.style.position = 'fixed';
-  errorContainer.style.left = 0;
-  errorContainer.style.top = 0;
-  errorContainer.style.right = 0;
-  errorContainer.style.padding = '10px 3px';
-  errorContainer.style.fontSize = '30px';
-  errorContainer.style.textAlign = 'center';
-  errorContainer.style.backgroundColor = 'red';
-
+  errorContainer.classList.add('error-container');
   errorContainer.textContent = error;
 
   document.body.append(errorContainer);
@@ -24,18 +13,14 @@ const showError = (error) => {
   }, ERROR_SHOW_TIME);
 };
 
-const onErrorPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePopup('error');
-  }
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
 };
 
-const onSuccessPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePopup('success');
-  }
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
 };
 
-export { isEscapeKey, showError, onErrorPopupEscKeydown, onSuccessPopupEscKeydown };
+export { showError, blockSubmitButton, unblockSubmitButton };
