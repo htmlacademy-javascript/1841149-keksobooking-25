@@ -2,35 +2,22 @@ let message;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const onErrorPopupEscKeydown = (evt) => {
+const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closePopup('error');
+    closePopup();
   }
 };
 
-const onSuccessPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePopup('success');
-  }
-};
-
-function closePopup (elementClassName) {
-  document.querySelector(`.${elementClassName}`).remove();
-  if (elementClassName === 'error') {
-    return document.removeEventListener('keydown', onErrorPopupEscKeydown);
-  }
-  document.removeEventListener('keydown', onSuccessPopupEscKeydown);
+function closePopup() {
+  document.querySelector('.popup').remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
 const onPopupClick = (elementClassName) => {
   document.body.append(message);
-  document.querySelector(`.${elementClassName}`).addEventListener('click', () => closePopup(elementClassName));
-  if (elementClassName === 'error') {
-    return document.addEventListener('keydown', onErrorPopupEscKeydown);
-  }
-  document.addEventListener('keydown', onSuccessPopupEscKeydown);
+  document.querySelector(`.${elementClassName}`).addEventListener('click', closePopup);
+  document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 const successPopup = () => {
