@@ -1,5 +1,4 @@
 import './form.js';
-import { showError } from './util.js';
 import './slider.js';
 import { setUserFromSubmit } from './form-validation.js';
 import { createMarker } from './map.js';
