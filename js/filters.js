@@ -1,44 +1,22 @@
 import { markerGroup } from './map.js';
 
+const mapFiltersForm = document.querySelector('.map__filters');
 const livingTypeInput = document.querySelector('#housing-type');
 const priceInput = document.querySelector('#housing-price');
 const roomsInput = document.querySelector('#housing-rooms');
 const guestsInput = document.querySelector('#housing-guests');
-const featureInputs = document.querySelectorAll('.map__checkbox');
+const pricesByValues = {
+  'low': [0, 10000],
+  'high': [50000, 100000],
+  'middle': [10000, 50000],
+  'any': [0, 100000],
+};
 
-const setLivingType = (cb) => {
-  livingTypeInput.addEventListener('change', () => {
+const setMapFilters = (cb) => {
+  mapFiltersForm.addEventListener('change', () => {
     markerGroup.clearLayers();
     cb();
   });
-};
-
-const setPrice = (cb) => {
-  priceInput.addEventListener('change', () => {
-    markerGroup.clearLayers();
-    cb();
-  });
-};
-
-const setRooms = (cb) => {
-  roomsInput.addEventListener('change', () => {
-    markerGroup.clearLayers();
-    cb();
-  });
-};
-
-const setGuests = (cb) => {
-  guestsInput.addEventListener('change', () => {
-    markerGroup.clearLayers();
-    cb();
-  });
-};
-
-const setFeatures = (cb) => {
-  featureInputs.forEach((el) => el.addEventListener('change', () => {
-    markerGroup.clearLayers();
-    cb();
-  }));
 };
 
 const filterByLivingType = ({offer}) => {
@@ -50,41 +28,11 @@ const filterByLivingType = ({offer}) => {
   }
 };
 
-const filterByPrice = ({offer}) => {
-  if (priceInput.value === 'any') {
-    return offer;
-  } else if (priceInput.value === 'middle') {
-    return offer.price >= 10000 && offer.price <= 50000;
-  } else if (priceInput.value === 'low') {
-    return offer.price <= 10000;
-  } else if (priceInput.value === 'high') {
-    return offer.price >= 50000;
-  }
-};
+const filterByPrice = ({offer}) => offer.price >= pricesByValues[priceInput.value][0] && offer.price <= pricesByValues[priceInput.value][1];
 
-const filterByRooms = ({offer}) => {
-  if (roomsInput.value === 'any') {
-    return offer;
-  } else if (roomsInput.value === '1') {
-    return offer.rooms === 1;
-  } else if (roomsInput.value === '2') {
-    return offer.rooms === 2;
-  } else if (roomsInput.value === '3') {
-    return offer.rooms === 3;
-  }
-};
+const filterByRooms = ({offer}) => (roomsInput.value === 'any') ? offer : Number(roomsInput.value);
 
-const filterByGuests = ({offer}) => {
-  if (guestsInput.value === 'any') {
-    return offer;
-  } else if (guestsInput.value === '1') {
-    return offer.guests === 1;
-  } else if (guestsInput.value === '2') {
-    return offer.guests === 2;
-  } else if (guestsInput.value === '0') {
-    return offer.guests === 0;
-  }
-};
+const filterByGuests = ({offer}) => (guestsInput.value === 'any') ? offer : Number(guestsInput.value);
 
 const isEqualArrays = (a, b) => a.length === b.length && a.every((val, index) => val === b[index]);
 
@@ -108,4 +56,4 @@ const filterOffers = (offers) => offers.filter((offer) => filterByLivingType(off
   .filter((offer) => filterByGuests(offer))
   .filter((offer) => filterByFeatures(offer));
 
-export { setLivingType, setPrice, setRooms, setGuests, setFeatures, filterOffers };
+export { setMapFilters ,filterOffers };
