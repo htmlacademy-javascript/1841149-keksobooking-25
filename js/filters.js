@@ -6,10 +6,22 @@ const priceInput = document.querySelector('#housing-price');
 const roomsInput = document.querySelector('#housing-rooms');
 const guestsInput = document.querySelector('#housing-guests');
 const pricesByValues = {
-  'low': [0, 10000],
-  'high': [50000, 100000],
-  'middle': [10000, 50000],
-  'any': [0, 100000],
+  'low': {
+    min: 0,
+    max: 10000
+  },
+  'high': {
+    min: 50000,
+    max: 100000
+  },
+  'middle': {
+    min: 10000,
+    max: 50000
+  },
+  'any': {
+    min: 0,
+    max: 100000
+  },
 };
 
 const setMapFilters = (cb) => {
@@ -28,7 +40,7 @@ const filterByLivingType = ({offer}) => {
   }
 };
 
-const filterByPrice = ({offer}) => offer.price >= pricesByValues[priceInput.value][0] && offer.price <= pricesByValues[priceInput.value][1];
+const filterByPrice = ({offer}) => offer.price >= pricesByValues[priceInput.value].min && offer.price <= pricesByValues[priceInput.value].max;
 
 const filterByRooms = ({offer}) => (roomsInput.value === 'any') ? offer : Number(roomsInput.value);
 
