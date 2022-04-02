@@ -46,20 +46,14 @@ const filterByRooms = ({offer}) => (roomsInput.value === 'any') ? offer : Number
 
 const filterByGuests = ({offer}) => (guestsInput.value === 'any') ? offer : Number(guestsInput.value);
 
-const isEqualArrays = (a, b) => a.length === b.length && a.every((val, index) => val === b[index]);
-
 const filterByFeatures = ({offer}) => {
-  let elementFeatures = [];
+  const filtersFeatures = [];
   const checkedFilters = document.querySelector('.map__features').querySelectorAll('input:checked');
-  if (checkedFilters.length === 0) {
-    return offer;
+  checkedFilters.forEach((el) => filtersFeatures.push(el.value));
+  if (offer.features !== undefined){
+    return filtersFeatures.every((feature) => offer.features.includes(feature));
   }
-  if (offer.features !== undefined) {
-    elementFeatures = offer.features;
-    const filtersFeatures = [];
-    checkedFilters.forEach((el) => filtersFeatures.push(el.value));
-    return isEqualArrays(elementFeatures.sort(), filtersFeatures.sort());
-  }
+  return false;
 };
 
 const filterOffers = (offers) => offers.filter((offer) => filterByLivingType(offer))
