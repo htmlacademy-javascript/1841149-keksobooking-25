@@ -56,14 +56,10 @@ const filterByFeatures = ({offer}) => {
   return false;
 };
 
-const filterOffers = (offers) => {
-  const filteredOffers = [];
-  for (const offer of offers) {
-    if(filterByLivingType(offer) && filterByPrice(offer) && filterByRooms(offer) && filterByGuests(offer) && filterByFeatures(offer)) {
-      filteredOffers.push(offer);
-    }
-  }
-  return filteredOffers;
-};
+const filterOffers = (offers) => offers.filter((offer) => (filterByLivingType(offer) &&
+filterByPrice(offer) &&
+filterByRooms(offer) &&
+filterByGuests(offer) &&
+filterByFeatures(offer)));
 
 export { setMapFilters ,filterOffers };
