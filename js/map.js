@@ -58,7 +58,7 @@ const mainPinMarker = L.icon({
 });
 
 const adPin = L.icon({
-  iconUrl: '../img/main-pin.svg',
+  iconUrl: '../img/pin.svg',
   iconSize: [AD_PIN_SIZE, AD_PIN_SIZE],
   iconAnchor: [AD_PIN_SIZE/2, AD_PIN_SIZE],
 });

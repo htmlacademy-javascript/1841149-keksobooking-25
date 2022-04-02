@@ -50,16 +50,20 @@ const filterByFeatures = ({offer}) => {
   const filtersFeatures = [];
   const checkedFilters = document.querySelector('.map__features').querySelectorAll('input:checked');
   checkedFilters.forEach((el) => filtersFeatures.push(el.value));
-  if (offer.features !== undefined){
+  if (offer.features){
     return filtersFeatures.every((feature) => offer.features.includes(feature));
   }
   return false;
 };
 
-const filterOffers = (offers) => offers.filter((offer) => filterByLivingType(offer))
-  .filter((offer) => filterByPrice(offer))
-  .filter((offer) => filterByRooms(offer))
-  .filter((offer) => filterByGuests(offer))
-  .filter((offer) => filterByFeatures(offer));
+const filterOffers = (offers) => {
+  const filteredOffers = [];
+  for (const offer of offers) {
+    if(filterByLivingType(offer) && filterByPrice(offer) && filterByRooms(offer) && filterByGuests(offer) && filterByFeatures(offer)) {
+      filteredOffers.push(offer);
+    }
+  }
+  return filteredOffers;
+};
 
 export { setMapFilters ,filterOffers };
