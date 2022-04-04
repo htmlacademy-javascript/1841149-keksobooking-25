@@ -42,9 +42,9 @@ const filterByLivingType = ({offer}) => {
 
 const filterByPrice = ({offer}) => offer.price >= pricesByValues[priceInput.value].min && offer.price <= pricesByValues[priceInput.value].max;
 
-const filterByRooms = ({offer}) => (roomsInput.value === 'any') ? offer : Number(roomsInput.value);
+const filterByRooms = ({offer}) => (roomsInput.value === 'any') ? offer : offer.rooms === Number(roomsInput.value);
 
-const filterByGuests = ({offer}) => (guestsInput.value === 'any') ? offer : Number(guestsInput.value);
+const filterByGuests = ({offer}) => (guestsInput.value === 'any') ? offer : offer.guests === Number(guestsInput.value);
 
 const filterByFeatures = ({offer}) => {
   const filtersFeatures = [];
