@@ -1,4 +1,8 @@
-import { adForm, resetMarker } from './map.js';
+import { adForm, resetMarker, renderMarkers } from './map.js';
+import { getData } from './api.js';
+import { filterOffers } from './filters.js';
+import { slider } from './slider.js';
+const mapFilters = document.querySelector('.map__filters');
 const price = document.querySelector('#price');
 const type = document.querySelector('#type');
 const timeIn = document.querySelector('#timein');
@@ -69,6 +73,9 @@ const resetForm = () => {
   const userPhotos = document.querySelectorAll('.photo');
   userPhotos.forEach((element) => element.remove());
   resetMarker();
+  mapFilters.reset();
+  getData((offers) => renderMarkers(offers));
+  slider.noUiSlider.reset();
 };
 
 const blockSubmitButton = () => {
@@ -82,8 +89,6 @@ const unblockSubmitButton = () => {
 };
 
 resetBtn.addEventListener('click', resetForm);
-
-// 4. Сделать дроп зону
 
 type.addEventListener('change', () => {
   price.placeholder = typePrice[type.value];
