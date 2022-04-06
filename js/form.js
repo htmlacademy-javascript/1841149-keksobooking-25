@@ -1,14 +1,14 @@
 import { adForm, resetMarker, renderMarkers } from './map.js';
+import { mapFiltersForm } from './filters.js';
 import { getData } from './api.js';
-import { filterOffers } from './filters.js';
 import { slider } from './slider.js';
-const mapFilters = document.querySelector('.map__filters');
+
 const price = document.querySelector('#price');
+const rooms = document.querySelector('#room_number');
+const guests = document.querySelector('#capacity');
 const type = document.querySelector('#type');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
-const rooms = document.querySelector('#room_number');
-const guests = document.querySelector('#capacity');
 const avatar = document.querySelector('#avatar');
 const preview = document.querySelector('.ad-form-header__preview');
 const avatarImg = preview.querySelector('img');
@@ -73,7 +73,7 @@ const resetForm = () => {
   const userPhotos = document.querySelectorAll('.photo');
   userPhotos.forEach((element) => element.remove());
   resetMarker();
-  mapFilters.reset();
+  mapFiltersForm.reset();
   getData((offers) => renderMarkers(offers));
   slider.noUiSlider.reset();
 };
