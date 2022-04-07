@@ -16,7 +16,8 @@ const photos = document.querySelector('#images');
 const photosContainer = document.querySelector('.ad-form__photo-container');
 const resetBtn = document.querySelector('.ad-form__reset');
 const submitButton = document.querySelector('.ad-form__submit');
-const typePrice = {
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
+const TypePrice = {
   flat: 1000,
   bungalow: 0,
   house: 5000,
@@ -39,7 +40,7 @@ const createImage = (files) => {
   if (files) {
     return reader.readAsDataURL(files);
   }
-  photo.src = 'img/muffin-grey.svg';
+  photo.src = DEFAULT_AVATAR;
 };
 
 const createAvatar = (file) => {
@@ -50,7 +51,7 @@ const createAvatar = (file) => {
   if (file) {
     reader.readAsDataURL(file);
   }
-  avatarImg.src = 'img/muffin-grey.svg';
+  avatarImg.src = DEFAULT_AVATAR;
 };
 
 const handleFileSelect = (evt) => {
@@ -67,8 +68,8 @@ const handleMultiFileSelect = (evt) => {
 
 const resetForm = () => {
   adForm.reset();
-  avatar.files.value = 'img/muffin-grey.svg';
-  avatarImg.src = 'img/muffin-grey.svg';
+  avatar.files.value = DEFAULT_AVATAR;
+  avatarImg.src = DEFAULT_AVATAR;
   photos.files.value = '';
   const userPhotos = document.querySelectorAll('.photo');
   userPhotos.forEach((element) => element.remove());
@@ -91,8 +92,8 @@ const unblockSubmitButton = () => {
 resetBtn.addEventListener('click', resetForm);
 
 type.addEventListener('change', () => {
-  price.placeholder = typePrice[type.value];
-  price.min = typePrice[type.value];
+  price.placeholder = TypePrice[type.value];
+  price.min = TypePrice[type.value];
 });
 
 timeIn.addEventListener('change', () => {
@@ -106,4 +107,4 @@ timeOut.addEventListener('change', () => {
 avatar.addEventListener('change', handleFileSelect, false);
 photos.addEventListener('change', handleMultiFileSelect, false);
 
-export { price, typePrice, resetForm, blockSubmitButton, unblockSubmitButton };
+export { price, TypePrice, resetForm, blockSubmitButton, unblockSubmitButton };
