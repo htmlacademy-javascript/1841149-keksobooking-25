@@ -2,8 +2,6 @@ import { onResetButtonClick } from './form.js';
 
 const ERROR_SHOW_TIME = 5000;
 const DATABASE_URL = 'https://25.javascript.pages.academy/keksobooking';
-const DATABASE_OFFERS_URL = 'https://25.javascript.pages.academy/keksobooking/data';
-
 
 const showError = (error) => {
   const errorContainer = document.createElement('div');
@@ -18,7 +16,7 @@ const showError = (error) => {
 };
 
 const getData = (onSuccess, onFail) => {
-  fetch(DATABASE_OFFERS_URL)
+  fetch(`${DATABASE_URL}/data`)
     .then((response) => response.json())
     .then((offers) => {
       onSuccess(offers);

@@ -54,12 +54,12 @@ const createAvatar = (file) => {
   avatarImg.src = DEFAULT_AVATAR;
 };
 
-const onAvatarImageLoad = (evt) => {
+const onAvatarImageChange = (evt) => {
   const file = evt.target.files[0];
   createAvatar(file);
 };
 
-const onPhotoImagesLoad = (evt) => {
+const onPhotoImagesChange = (evt) => {
   const files = evt.target.files;
   for(let i = 0; i <= files.length; i++) {
     createImage(files[i]);
@@ -105,7 +105,7 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-avatar.addEventListener('change', onAvatarImageLoad, false);
-photos.addEventListener('change', onPhotoImagesLoad, false);
+avatar.addEventListener('change', onAvatarImageChange, false);
+photos.addEventListener('change', onPhotoImagesChange, false);
 
 export { price, TypePrice, onResetButtonClick, blockSubmitButton, unblockSubmitButton };
