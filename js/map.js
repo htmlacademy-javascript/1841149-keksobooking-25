@@ -78,12 +78,12 @@ const createMarker = (point) => {
     .bindPopup(createOffer(point));
 };
 
-function renderMarkers(offers) {
+const renderMarkers = (offers) => {
   offers
     .slice()
     .slice(0, OFFERS_COUNT)
     .forEach((point) => createMarker(point));
-}
+};
 
 const loadMap = () => {
   map.on('load', () => {
