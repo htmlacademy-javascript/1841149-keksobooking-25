@@ -1,6 +1,9 @@
 import { createOffer } from './offer.js';
-import { mapFiltersForm } from './filters.js';
+import { mapFiltersForm, setMapFilters, filterOffers } from './filters.js';
 import { adForm } from './form-validation.js';
+import { getData, showError } from './api.js';
+import { debounce } from './debounce.js';
+
 const MAIN_PIN_SIZE = 52;
 const AD_PIN_SIZE = 40;
 const BASIC_LAT = 35.68948;
@@ -9,6 +12,7 @@ const BASIC_MAP_SCALING = 13;
 const DECIMAL_PLACE = 5;
 const OFFERS_COUNT = 10;
 const map = L.map('map-canvas');
+const adress = document.querySelector('#address');
 
 const toggleClass = (element, className, value) => {
   element.classList.toggle(className, value);
@@ -32,30 +36,6 @@ const toggleForms = (value) => {
   toggleAdForm(value);
   toggleFiltersForm(value);
 };
-
-const adress = document.querySelector('#address');
-
-const loadMap = () => {
-  map.on('load', () => {
-    toggleAdForm(false);
-  })
-    .setView({
-      lat: BASIC_LAT,
-      lng: BASIC_LNG,
-    }, BASIC_MAP_SCALING);
-};
-
-const resetMap = () => map.setView({
-  lat: BASIC_LAT,
-  lng: BASIC_LNG,
-});
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
 
 const mainPinMarker = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -98,18 +78,46 @@ const createMarker = (point) => {
     .bindPopup(createOffer(point));
 };
 
+function renderMarkers(offers) {
+  offers
+    .slice()
+    .slice(0, OFFERS_COUNT)
+    .forEach((point) => createMarker(point));
+}
+
+const loadMap = () => {
+  map.on('load', () => {
+    getData((offers) => {
+      setMapFilters(debounce(
+        () => renderMarkers(filterOffers(offers)),
+      ));
+      renderMarkers(offers);
+      toggleForms(false);
+    }, () => showError('Не удалось получить данные. Попробуйте ещё раз'));
+  })
+    .setView({
+      lat: BASIC_LAT,
+      lng: BASIC_LNG,
+    }, BASIC_MAP_SCALING);
+};
+
+const resetMap = () => map.setView({
+  lat: BASIC_LAT,
+  lng: BASIC_LNG,
+});
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+
 const resetMarker = () => {
   marker.setLatLng({
     lat: BASIC_LAT,
     lng: BASIC_LNG,
   });
-};
-
-const renderMarkers = (offers) => {
-  offers
-    .slice()
-    .slice(0, OFFERS_COUNT)
-    .forEach((point) => createMarker(point));
 };
 
 marker.addTo(map);
