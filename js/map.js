@@ -113,4 +113,4 @@ marker.on('moveend', (evt) => {
   adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
-export { createMarker, marker, adForm, resetMarker, map, markerGroup, renderMarkers };
+export { adForm, resetMarker, markerGroup, renderMarkers };
