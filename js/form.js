@@ -1,4 +1,4 @@
-import { adForm, resetMarker, renderMarkers } from './map.js';
+import { adForm, resetMarker, renderMarkers, resetMap } from './map.js';
 import { mapFiltersForm } from './filters.js';
 import { getData } from './api.js';
 import { slider } from './slider.js';
@@ -54,19 +54,19 @@ const createAvatar = (file) => {
   avatarImg.src = DEFAULT_AVATAR;
 };
 
-const handleFileSelect = (evt) => {
+const onAvatarImageLoad = (evt) => {
   const file = evt.target.files[0];
   createAvatar(file);
 };
 
-const handleMultiFileSelect = (evt) => {
+const onPhotoImagesLoad = (evt) => {
   const files = evt.target.files;
   for(let i = 0; i <= files.length; i++) {
     createImage(files[i]);
   }
 };
 
-const resetForm = () => {
+const onResetButtonClick = () => {
   adForm.reset();
   avatar.files.value = DEFAULT_AVATAR;
   avatarImg.src = DEFAULT_AVATAR;
@@ -77,6 +77,7 @@ const resetForm = () => {
   mapFiltersForm.reset();
   getData((offers) => renderMarkers(offers));
   slider.noUiSlider.reset();
+  resetMap();
 };
 
 const blockSubmitButton = () => {
@@ -89,7 +90,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-resetBtn.addEventListener('click', resetForm);
+resetBtn.addEventListener('click', onResetButtonClick);
 
 type.addEventListener('change', () => {
   price.placeholder = TypePrice[type.value];
@@ -104,7 +105,7 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-avatar.addEventListener('change', handleFileSelect, false);
-photos.addEventListener('change', handleMultiFileSelect, false);
+avatar.addEventListener('change', onAvatarImageLoad, false);
+photos.addEventListener('change', onPhotoImagesLoad, false);
 
-export { price, TypePrice, resetForm, blockSubmitButton, unblockSubmitButton };
+export { price, TypePrice, onResetButtonClick, blockSubmitButton, unblockSubmitButton };

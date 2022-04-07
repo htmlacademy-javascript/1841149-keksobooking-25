@@ -3,11 +3,12 @@ import { mapFiltersForm } from './filters.js';
 import { adForm } from './form-validation.js';
 const MAIN_PIN_SIZE = 52;
 const AD_PIN_SIZE = 40;
-const BASIC_LAT = 35.6938;
-const BASIC_LNG = 139.7034;
+const BASIC_LAT = 35.68948;
+const BASIC_LNG = 139.69170;
 const BASIC_MAP_SCALING = 13;
 const DECIMAL_PLACE = 5;
 const OFFERS_COUNT = 10;
+const map = L.map('map-canvas');
 
 const toggleClass = (element, className, value) => {
   element.classList.toggle(className, value);
@@ -33,16 +34,21 @@ const toggleForms = (value) => {
 };
 
 const adress = document.querySelector('#address');
-toggleForms(true);
 
-const map = L.map('map-canvas')
-  .on('load', () => {
-    toggleForms(false);
+const loadMap = () => {
+  map.on('load', () => {
+    toggleAdForm(false);
   })
-  .setView({
-    lat: BASIC_LAT,
-    lng: BASIC_LNG,
-  }, BASIC_MAP_SCALING);
+    .setView({
+      lat: BASIC_LAT,
+      lng: BASIC_LNG,
+    }, BASIC_MAP_SCALING);
+};
+
+const resetMap = () => map.setView({
+  lat: BASIC_LAT,
+  lng: BASIC_LNG,
+});
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -108,9 +114,9 @@ const renderMarkers = (offers) => {
 
 marker.addTo(map);
 
-marker.on('moveend', (evt) => {
+marker.on('drag', (evt) => {
   const coordinates = evt.target.getLatLng();
   adress.value = `${coordinates.lat.toFixed(DECIMAL_PLACE)}, ${coordinates.lng.toFixed(DECIMAL_PLACE)}`;
 });
 
-export { adForm, resetMarker, markerGroup, renderMarkers };
+export { loadMap, resetMap, adForm, resetMarker, markerGroup, renderMarkers, toggleForms, toggleFiltersForm };
