@@ -3,6 +3,7 @@ import { mapFiltersForm } from './filters.js';
 import { getData } from './api.js';
 import { slider } from './slider.js';
 
+const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const price = document.querySelector('#price');
 const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
@@ -16,7 +17,6 @@ const photos = document.querySelector('#images');
 const photosContainer = document.querySelector('.ad-form__photo-container');
 const resetBtn = document.querySelector('.ad-form__reset');
 const submitButton = document.querySelector('.ad-form__submit');
-const DEFAULT_AVATAR = 'img/muffin-grey.svg';
 const TypePrice = {
   flat: 1000,
   bungalow: 0,
